@@ -5,6 +5,7 @@ import { BackButton } from "~/components/BackButton";
 import "./index.css";
 import { fetchLists, updateList, deleteList } from "~/store/list";
 import { useId } from "~/hooks/useId";
+import Button from "~/components/common/Button";
 
 const EditList = () => {
   const id = useId();
@@ -96,17 +97,28 @@ const EditList = () => {
             Cancel
           </Link>
           <div className="edit_list__form_actions_spacer"></div>
-          <button
+          {/* <button
             type="button"
             className="app_button edit_list__form_actions_delete"
             disabled={isSubmitting}
             onClick={handleDelete}
           >
             Delete
-          </button>
-          <button type="submit" className="app_button" disabled={isSubmitting}>
+          </button> */}
+          <Button
+            type="button"
+            className="app_button edit_list__form_actions_delete"
+            disabled={isSubmitting}
+            onClick={handleDelete}
+          >
+            Delete
+          </Button>
+          {/* <button type="submit" className="app_button" disabled={isSubmitting}>
             Update
-          </button>
+          </button> */}
+          <Button type="submit" className="app_button" disabled={isSubmitting}>
+            Update
+          </Button>
         </div>
       </form>
     </main>
