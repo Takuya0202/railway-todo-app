@@ -7,6 +7,7 @@ import { useLogout } from "~/hooks/useLogout";
 import { useEffect } from "react";
 import { fetchLists } from "~/store/list/index";
 import React from "react";
+import Button from "./common/Button";
 
 export const Sidebar = () => {
   const dispatch = useDispatch();
@@ -61,13 +62,20 @@ export const Sidebar = () => {
           <div className="sidebar__spacer" aria-hidden />
           <div className="sidebar__account">
             <p className="sidebar__account_name">{userName}</p>
-            <button
+            {/* <button
               type="button"
               className="sidebar__account_logout"
               onClick={logout}
             >
               Logout
-            </button>
+            </button> */}
+            <Button
+              type="button"
+              className="sidebar__account_logout"
+              onClick={logout}
+            >
+              Logout
+            </Button>
           </div>
         </>
       ) : (

@@ -6,6 +6,7 @@ import { CheckIcon } from "~/icons/CheckIcon";
 import { updateTask } from "~/store/task";
 import "./TaskItem.css";
 import React from "react";
+import Button from "./common/Button";
 
 export const TaskItem = ({ task }) => {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ export const TaskItem = ({ task }) => {
   return (
     <div className="task_item">
       <div className="task_item__title_container">
-        <button
+        {/* <button
           type="button"
           onClick={handleToggle}
           disabled={isSubmitting}
@@ -41,7 +42,24 @@ export const TaskItem = ({ task }) => {
               aria-label="Incomplete"
             ></div>
           )}
-        </button>
+        </button> */}
+        <Button
+          type="button"
+          onClick={handleToggle}
+          disabled={isSubmitting}
+          className="task__item__mark_button"
+        >
+          {done ? (
+            <div className="task_item__mark____complete" aria-label="Completed">
+              <CheckIcon className="task_item__mark____complete_check" />
+            </div>
+          ) : (
+            <div
+              className="task_item__mark____incomplete"
+              aria-label="Incomplete"
+            ></div>
+          )}
+        </Button>
         <div className="task_item__title" data-done={done}>
           {title}
         </div>

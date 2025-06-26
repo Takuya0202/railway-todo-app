@@ -8,6 +8,8 @@ import { fetchTasks, updateTask, deleteTask } from "~/store/task";
 import { useId } from "~/hooks/useId";
 import React from "react";
 import Button from "~/components/common/Button";
+import Input from "~/components/common/Input";
+import Textarea from "~/components/common/Textarea";
 
 const EditTask = () => {
   const id = useId();
@@ -91,7 +93,14 @@ const EditTask = () => {
           <label htmlFor={`${id}-title`} className="edit_list__form_label">
             Title
           </label>
-          <input
+          {/* <input
+            id={`${id}-title`}
+            className="app_input"
+            placeholder="Buy some milk"
+            value={title}
+            onChange={(event) => setTitle(event.target.value)}
+          /> */}
+          <Input
             id={`${id}-title`}
             className="app_input"
             placeholder="Buy some milk"
@@ -103,7 +112,14 @@ const EditTask = () => {
           <label htmlFor={`${id}-detail`} className="edit_list__form_label">
             Description
           </label>
-          <textarea
+          {/* <textarea
+            id={`${id}-detail`}
+            className="app_input"
+            placeholder="Blah blah blah"
+            value={detail}
+            onChange={(event) => setDetail(event.target.value)}
+          /> */}
+          <Textarea
             id={`${id}-detail`}
             className="app_input"
             placeholder="Blah blah blah"
@@ -116,7 +132,13 @@ const EditTask = () => {
             Is Done
           </label>
           <div>
-            <input
+            {/* <input
+              id={`${id}-done`}
+              type="checkbox"
+              checked={done}
+              onChange={(event) => setDone(event.target.checked)}
+            /> */}
+            <Input
               id={`${id}-done`}
               type="checkbox"
               checked={done}

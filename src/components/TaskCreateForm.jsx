@@ -4,6 +4,9 @@ import "./TaskCreateForm.css";
 import { CheckIcon } from "~/icons/CheckIcon";
 import { createTask } from "~/store/task";
 import React from "react";
+import Button from "./common/Button";
+import Input from "./common/Input";
+import Textarea from "./common/Textarea";
 export const TaskCreateForm = () => {
   const dispatch = useDispatch();
 
@@ -93,7 +96,7 @@ export const TaskCreateForm = () => {
       data-state={formState}
     >
       <div className="task_create_form__title_container">
-        <button
+        {/* <button
           type="button"
           onClick={handleToggle}
           className="task_create_form__mark_button"
@@ -113,8 +116,39 @@ export const TaskCreateForm = () => {
               aria-label="Incomplete"
             ></div>
           )}
-        </button>
-        <input
+        </button> */}
+        <Button
+          type="button"
+          onClick={handleToggle}
+          className="task_create_form__mark_button"
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+        >
+          {done ? (
+            <div
+              className="task_create_form__mark____complete"
+              aria-label="Completed"
+            >
+              <CheckIcon className="task_create_form__mark____complete_check" />
+            </div>
+          ) : (
+            <div
+              className="task_create_form__mark____incomplete"
+              aria-label="Incomplete"
+            ></div>
+          )}
+        </Button>
+        {/* <input
+          type="text"
+          className="task_create_form__title"
+          placeholder="Add a new task..."
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          disabled={formState === "submitting"}
+        /> */}
+        <Input
           type="text"
           className="task_create_form__title"
           placeholder="Add a new task..."
@@ -127,7 +161,17 @@ export const TaskCreateForm = () => {
       </div>
       {formState !== "initial" && (
         <div>
-          <textarea
+          {/* <textarea
+            ref={setElemTextarea}
+            rows={1}
+            className="task_create_form__detail"
+            placeholder="Add a description here..."
+            value={detail}
+            onChange={(e) => setDetail(e.target.value)}
+            onBlur={handleBlur}
+            disabled={formState === "submitting"}
+          /> */}
+          <Textarea
             ref={setElemTextarea}
             rows={1}
             className="task_create_form__detail"
@@ -138,7 +182,7 @@ export const TaskCreateForm = () => {
             disabled={formState === "submitting"}
           />
           <div className="task_create_form__actions">
-            <button
+            {/* <button
               type="button"
               className="app_button"
               data-variant="secondary"
@@ -147,16 +191,34 @@ export const TaskCreateForm = () => {
               disabled={(!title && !detail) || formState === "submitting"}
             >
               Discard
-            </button>
+            </button> */}
+            <Button
+              type="button"
+              className="app_button"
+              data-variant="secondary"
+              onBlur={handleBlur}
+              onClick={handleDiscard}
+              disabled={(!title && !detail) || formState === "submitting"}
+            >
+              Discard
+            </Button>
             <div className="task_create_form__spacer"></div>
-            <button
+            {/* <button
               type="submit"
               className="app_button"
               onBlur={handleBlur}
               disabled={!title || !detail || formState === "submitting"}
             >
               Add
-            </button>
+            </button> */}
+            <Button
+              type="submit"
+              className="app_button"
+              onBlur={handleBlur}
+              disabled={!title || !detail || formState === "submitting"}
+            >
+              Add
+            </Button>
           </div>
         </div>
       )}
