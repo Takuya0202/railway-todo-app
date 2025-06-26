@@ -1,3 +1,4 @@
+import React from "react";
 export const CheckIcon = (props) => (
   <svg
     width="16"

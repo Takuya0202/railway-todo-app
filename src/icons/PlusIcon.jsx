@@ -1,3 +1,4 @@
+import React from "react";
 export const PlusIcon = (props) => {
   return (
     <svg

@@ -5,6 +5,7 @@ import { PencilIcon } from "~/icons/PencilIcon";
 import { CheckIcon } from "~/icons/CheckIcon";
 import { updateTask } from "~/store/task";
 import "./TaskItem.css";
+import React from "react";
 
 export const TaskItem = ({ task }) => {
   const dispatch = useDispatch();

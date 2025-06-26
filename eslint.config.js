@@ -9,6 +9,7 @@ export default defineConfig([
     files: ["**/*.{js,mjs,cjs,jsx}"],
     plugins: { js },
     extends: ["js/recommended"],
+    rules: {},
   },
   {
     files: ["**/*.{js,mjs,cjs,jsx}"],
@@ -16,4 +17,11 @@ export default defineConfig([
   },
   pluginReact.configs.flat.recommended,
   eslintConfigPrettier,
+  // props-typeを無効化する。pluginReact.configs.flat.recommendedの前に書くと上書きされて無効化されるので、後で記載
+  {
+    rules: {
+      "react/prop-types": "off",
+      "no-unused-vars": "off",
+    },
+  },
 ]);

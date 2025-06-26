@@ -6,7 +6,7 @@ import "./index.css";
 import { fetchLists, updateList, deleteList } from "~/store/list";
 import { useId } from "~/hooks/useId";
 import Button from "~/components/common/Button";
-
+import React from "react";
 const EditList = () => {
   const id = useId();
 
