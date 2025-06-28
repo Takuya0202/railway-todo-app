@@ -10,6 +10,7 @@ import Textarea from "./common/Textarea";
 export const TaskCreateForm = () => {
   const dispatch = useDispatch();
 
+  // フォームがフォーカスされているかの状態を調べたいから？
   const refForm = useRef(null);
   const [elemTextarea, setElemTextarea] = useState(null);
 
@@ -18,7 +19,9 @@ export const TaskCreateForm = () => {
   const [title, setTitle] = useState("");
   const [detail, setDetail] = useState("");
   const [done, setDone] = useState(false);
+  const [deadline,setDeadline] = useState();
 
+  // useCallbackは第二引数に関連があるときに、再定義される関数。パフォーマンス向上？
   const handleToggle = useCallback(() => {
     setDone((prev) => !prev);
   }, []);
@@ -96,27 +99,6 @@ export const TaskCreateForm = () => {
       data-state={formState}
     >
       <div className="task_create_form__title_container">
-        {/* <button
-          type="button"
-          onClick={handleToggle}
-          className="task_create_form__mark_button"
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-        >
-          {done ? (
-            <div
-              className="task_create_form__mark____complete"
-              aria-label="Completed"
-            >
-              <CheckIcon className="task_create_form__mark____complete_check" />
-            </div>
-          ) : (
-            <div
-              className="task_create_form__mark____incomplete"
-              aria-label="Incomplete"
-            ></div>
-          )}
-        </button> */}
         <Button
           type="button"
           onClick={handleToggle}
@@ -138,16 +120,6 @@ export const TaskCreateForm = () => {
             ></div>
           )}
         </Button>
-        {/* <input
-          type="text"
-          className="task_create_form__title"
-          placeholder="Add a new task..."
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          disabled={formState === "submitting"}
-        /> */}
         <Input
           type="text"
           className="task_create_form__title"
@@ -161,16 +133,6 @@ export const TaskCreateForm = () => {
       </div>
       {formState !== "initial" && (
         <div>
-          {/* <textarea
-            ref={setElemTextarea}
-            rows={1}
-            className="task_create_form__detail"
-            placeholder="Add a description here..."
-            value={detail}
-            onChange={(e) => setDetail(e.target.value)}
-            onBlur={handleBlur}
-            disabled={formState === "submitting"}
-          /> */}
           <Textarea
             ref={setElemTextarea}
             rows={1}
@@ -181,17 +143,13 @@ export const TaskCreateForm = () => {
             onBlur={handleBlur}
             disabled={formState === "submitting"}
           />
+          <Textarea
+            value={deadline}
+            placeholder={'締め切りを選択'}
+            onChange={(e) => setDeadline(e.target.value)}
+            disabled={formState === 'submitting'}
+          />
           <div className="task_create_form__actions">
-            {/* <button
-              type="button"
-              className="app_button"
-              data-variant="secondary"
-              onBlur={handleBlur}
-              onClick={handleDiscard}
-              disabled={(!title && !detail) || formState === "submitting"}
-            >
-              Discard
-            </button> */}
             <Button
               type="button"
               className="app_button"
@@ -203,14 +161,6 @@ export const TaskCreateForm = () => {
               Discard
             </Button>
             <div className="task_create_form__spacer"></div>
-            {/* <button
-              type="submit"
-              className="app_button"
-              onBlur={handleBlur}
-              disabled={!title || !detail || formState === "submitting"}
-            >
-              Add
-            </button> */}
             <Button
               type="submit"
               className="app_button"
