@@ -8,6 +8,7 @@ import { useId } from "~/hooks/useId";
 import Button from "~/components/common/Buttons/Button";
 import React from "react";
 import Input from "~/components/common/Input";
+import AppButton from "~/components/common/Buttons/AppButton";
 const EditList = () => {
   const id = useId();
 
@@ -85,13 +86,6 @@ const EditList = () => {
           <label htmlFor={`${id}-title`} className="edit_list__form_label">
             Name
           </label>
-          {/* <input
-            id={`${id}-title`}
-            className="app_input"
-            placeholder="Family"
-            value={title}
-            onChange={(event) => setTitle(event.target.value)}
-          /> */}
           <Input
             id={`${id}-title`}
             className="app_input"
@@ -105,14 +99,6 @@ const EditList = () => {
             Cancel
           </Link>
           <div className="edit_list__form_actions_spacer"></div>
-          {/* <button
-            type="button"
-            className="app_button edit_list__form_actions_delete"
-            disabled={isSubmitting}
-            onClick={handleDelete}
-          >
-            Delete
-          </button> */}
           <Button
             type="button"
             className="app_button edit_list__form_actions_delete"
@@ -121,12 +107,9 @@ const EditList = () => {
           >
             Delete
           </Button>
-          {/* <button type="submit" className="app_button" disabled={isSubmitting}>
+          <AppButton type="submit" disabled={isSubmitting}>
             Update
-          </button> */}
-          <Button type="submit" className="app_button" disabled={isSubmitting}>
-            Update
-          </Button>
+          </AppButton>
         </div>
       </form>
     </main>

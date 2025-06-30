@@ -7,6 +7,7 @@ import React from "react";
 import Button from "./common/Buttons/Button";
 import Input from "./common/Input";
 import Textarea from "./common/Textarea";
+import AppButton from "./common/Buttons/AppButton";
 export const TaskCreateForm = () => {
   const dispatch = useDispatch();
 
@@ -150,25 +151,21 @@ export const TaskCreateForm = () => {
             disabled={formState === "submitting"}
           />
           <div className="task_create_form__actions">
-            <Button
-              type="button"
-              className="app_button"
+            <AppButton type="button"
               data-variant="secondary"
               onBlur={handleBlur}
               onClick={handleDiscard}
-              disabled={(!title && !detail) || formState === "submitting"}
-            >
+              disabled={(!title && !detail) || formState === "submitting"}>
               Discard
-            </Button>
+            </AppButton>
             <div className="task_create_form__spacer"></div>
-            <Button
+            <AppButton
               type="submit"
-              className="app_button"
               onBlur={handleBlur}
               disabled={!title || !detail || formState === "submitting"}
             >
               Add
-            </Button>
+            </AppButton>
           </div>
         </div>
       )}

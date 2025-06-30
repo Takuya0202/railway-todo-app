@@ -8,6 +8,7 @@ import { fetchTasks } from "~/store/task";
 import "./index.css";
 import Button from "~/components/common/Buttons/Button";
 import React from "react";
+import AppButton from "~/components/common/Buttons/AppButton";
 
 const ListIndex = () => {
   const dispatch = useDispatch();
@@ -47,8 +48,7 @@ const ListIndex = () => {
         )}
         <div className="tasks_list__title_spacer"></div>
         <Link to={`/lists/${listId}/edit`}>
-          {/* <button className="app_button">Edit...</button> */}
-          <Button className="app_button">Edit...</Button>
+          <AppButton>Edit...</AppButton>
         </Link>
       </div>
       <div className="tasks_list__items">

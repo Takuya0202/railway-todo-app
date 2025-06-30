@@ -9,10 +9,6 @@ const handleClick = () => {
 
 export const BackButton = () => {
   return (
-    // <button type="button" onClick={handleClick} className="back_button">
-    //   <ChevronIcon className="back_button__icon" />
-    //   Back
-    // </button>
     <Button type="button" onClick={handleClick} className="back_button">
       <ChevronIcon className="back_button__icon" />
       Back

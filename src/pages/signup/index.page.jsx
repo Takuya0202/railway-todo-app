@@ -6,6 +6,7 @@ import { useSignup } from "~/hooks/useSignup";
 import { useId } from "~/hooks/useId";
 import Button from "~/components/common/Buttons/Button";
 import Input from "~/components/common/Input";
+import AppButton from "~/components/common/Buttons/AppButton";
 
 const SignUp = () => {
   const auth = useSelector((state) => state.auth.token !== null);
@@ -50,13 +51,6 @@ const SignUp = () => {
           <label htmlFor={`${id}-email`} className="signup__form_label">
             E-mail Address
           </label>
-          {/* <input
-            id={`${id}-email`}
-            autoComplete="email"
-            className="app_input"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-          /> */}
           <Input
             id={`${id}-email`}
             autoComplete="email"
@@ -73,13 +67,6 @@ const SignUp = () => {
           >
             Name
           </label>
-          {/* <input
-            id={`${id}-name`}
-            type="text"
-            className="app_input"
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-          /> */}
           <Input
             id={`${id}-name`}
             type="text"
@@ -96,13 +83,6 @@ const SignUp = () => {
           >
             Password
           </label>
-          {/* <input
-            id={`${id}-password`}
-            type="password"
-            className="app_input"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-          /> */}
           <Input
             id={`${id}-password`}
             type="password"
@@ -116,12 +96,9 @@ const SignUp = () => {
             Login
           </Link>
           <div className="signup__form_actions_spacer"></div>
-          {/* <button type="submit" className="app_button" disabled={isSubmitting}>
+          <AppButton type="submit" disabled={isSubmitting}>
             Register
-          </button> */}
-          <Button type="submit" className="app_button" disabled={isSubmitting}>
-            Register
-          </Button>
+          </AppButton>
         </div>
       </form>
     </main>

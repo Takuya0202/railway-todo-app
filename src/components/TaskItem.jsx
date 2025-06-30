@@ -26,23 +26,6 @@ export const TaskItem = ({ task }) => {
   return (
     <div className="task_item">
       <div className="task_item__title_container">
-        {/* <button
-          type="button"
-          onClick={handleToggle}
-          disabled={isSubmitting}
-          className="task__item__mark_button"
-        >
-          {done ? (
-            <div className="task_item__mark____complete" aria-label="Completed">
-              <CheckIcon className="task_item__mark____complete_check" />
-            </div>
-          ) : (
-            <div
-              className="task_item__mark____incomplete"
-              aria-label="Incomplete"
-            ></div>
-          )}
-        </button> */}
         <Button
           type="button"
           onClick={handleToggle}

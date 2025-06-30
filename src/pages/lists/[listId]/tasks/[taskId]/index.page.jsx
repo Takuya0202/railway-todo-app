@@ -10,6 +10,7 @@ import React from "react";
 import Button from "~/components/common/Buttons/Button";
 import Input from "~/components/common/Input";
 import Textarea from "~/components/common/Textarea";
+import AppButton from "~/components/common/Buttons/AppButton";
 
 const EditTask = () => {
   const id = useId();
@@ -93,13 +94,6 @@ const EditTask = () => {
           <label htmlFor={`${id}-title`} className="edit_list__form_label">
             Title
           </label>
-          {/* <input
-            id={`${id}-title`}
-            className="app_input"
-            placeholder="Buy some milk"
-            value={title}
-            onChange={(event) => setTitle(event.target.value)}
-          /> */}
           <Input
             id={`${id}-title`}
             className="app_input"
@@ -112,13 +106,6 @@ const EditTask = () => {
           <label htmlFor={`${id}-detail`} className="edit_list__form_label">
             Description
           </label>
-          {/* <textarea
-            id={`${id}-detail`}
-            className="app_input"
-            placeholder="Blah blah blah"
-            value={detail}
-            onChange={(event) => setDetail(event.target.value)}
-          /> */}
           <Textarea
             id={`${id}-detail`}
             className="app_input"
@@ -132,12 +119,6 @@ const EditTask = () => {
             Is Done
           </label>
           <div>
-            {/* <input
-              id={`${id}-done`}
-              type="checkbox"
-              checked={done}
-              onChange={(event) => setDone(event.target.checked)}
-            /> */}
             <Input
               id={`${id}-done`}
               type="checkbox"
@@ -151,14 +132,6 @@ const EditTask = () => {
             Cancel
           </Link>
           <div className="edit_list__form_actions_spacer"></div>
-          {/* <button
-            type="button"
-            className="app_button edit_list__form_actions_delete"
-            disabled={isSubmitting}
-            onClick={handleDelete}
-          >
-            Delete
-          </button> */}
           <Button
             type="button"
             className="app_button edit_list__form_actions_delete"
@@ -167,12 +140,9 @@ const EditTask = () => {
           >
             Delete
           </Button>
-          {/* <button type="submit" className="app_button" disabled={isSubmitting}>
+          <AppButton type="submit" disabled={isSubmitting}>
             Update
-          </button> */}
-          <Button type="submit" className="app_button" disabled={isSubmitting}>
-            Update
-          </Button>
+          </AppButton>
         </div>
       </form>
     </main>
