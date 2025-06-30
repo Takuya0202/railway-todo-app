@@ -1,11 +1,11 @@
 import { useCallback, useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { BackButton } from "~/components/BackButton";
+import { BackButton } from "~/components/common/Buttons/BackButton";
 import "./index.css";
 import { fetchLists, updateList, deleteList } from "~/store/list";
 import { useId } from "~/hooks/useId";
-import Button from "~/components/common/Button";
+import Button from "~/components/common/Buttons/Button";
 import React from "react";
 import Input from "~/components/common/Input";
 const EditList = () => {

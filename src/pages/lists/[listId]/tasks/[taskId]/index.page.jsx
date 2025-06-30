@@ -1,13 +1,13 @@
 import { useCallback, useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { BackButton } from "~/components/BackButton";
+import { BackButton } from "~/components/common/Buttons/BackButton";
 import "./index.css";
 import { setCurrentList } from "~/store/list";
 import { fetchTasks, updateTask, deleteTask } from "~/store/task";
 import { useId } from "~/hooks/useId";
 import React from "react";
-import Button from "~/components/common/Button";
+import Button from "~/components/common/Buttons/Button";
 import Input from "~/components/common/Input";
 import Textarea from "~/components/common/Textarea";
 

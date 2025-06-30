@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import "./index.css";
 import { useSignup } from "~/hooks/useSignup";
 import { useId } from "~/hooks/useId";
-import Button from "~/components/common/Button";
+import Button from "~/components/common/Buttons/Button";
 import Input from "~/components/common/Input";
 
 const SignUp = () => {

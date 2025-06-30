@@ -1,7 +1,7 @@
 import { ChevronIcon } from "~/icons/ChevronIcon";
 import "./BackButton.css";
 import React from "react";
-import Button from "./common/Button";
+import Button from "./Button";
 
 const handleClick = () => {
   window.history.back();

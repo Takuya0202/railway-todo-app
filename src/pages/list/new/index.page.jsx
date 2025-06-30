@@ -1,11 +1,11 @@
 import React, { useCallback, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { BackButton } from "~/components/BackButton";
+import { BackButton } from "~/components/common/Buttons/BackButton";
 import "./index.css";
 import { createList, setCurrentList } from "~/store/list/index";
 import { useId } from "~/hooks/useId";
-import Button from "~/components/common/Button";
+import Button from "~/components/common/Buttons/Button";
 import Input from "~/components/common/Input";
 
 const NewList = () => {

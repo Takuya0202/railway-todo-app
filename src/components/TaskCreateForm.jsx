@@ -4,7 +4,7 @@ import "./TaskCreateForm.css";
 import { CheckIcon } from "~/icons/CheckIcon";
 import { createTask } from "~/store/task";
 import React from "react";
-import Button from "./common/Button";
+import Button from "./common/Buttons/Button";
 import Input from "./common/Input";
 import Textarea from "./common/Textarea";
 export const TaskCreateForm = () => {
@@ -19,7 +19,7 @@ export const TaskCreateForm = () => {
   const [title, setTitle] = useState("");
   const [detail, setDetail] = useState("");
   const [done, setDone] = useState(false);
-  const [deadline,setDeadline] = useState();
+  const [deadline, setDeadline] = useState();
 
   // useCallbackは第二引数に関連があるときに、再定義される関数。パフォーマンス向上？
   const handleToggle = useCallback(() => {
@@ -145,9 +145,9 @@ export const TaskCreateForm = () => {
           />
           <Textarea
             value={deadline}
-            placeholder={'締め切りを選択'}
+            placeholder={"締め切りを選択"}
             onChange={(e) => setDeadline(e.target.value)}
-            disabled={formState === 'submitting'}
+            disabled={formState === "submitting"}
           />
           <div className="task_create_form__actions">
             <Button

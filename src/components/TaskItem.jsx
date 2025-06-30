@@ -6,7 +6,7 @@ import { CheckIcon } from "~/icons/CheckIcon";
 import { updateTask } from "~/store/task";
 import "./TaskItem.css";
 import React from "react";
-import Button from "./common/Button";
+import Button from "./common/Buttons/Button";
 
 export const TaskItem = ({ task }) => {
   const dispatch = useDispatch();

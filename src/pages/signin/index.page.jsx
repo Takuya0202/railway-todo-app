@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useLogin } from "~/hooks/useLogin";
 import { useId } from "~/hooks/useId";
 import "./index.css";
-import Button from "~/components/common/Button";
+import Button from "~/components/common/Buttons/Button";
 import Input from "~/components/common/Input";
 
 const SignIn = () => {
