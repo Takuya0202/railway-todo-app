@@ -76,7 +76,11 @@ const SignIn = () => {
             Register
           </Link>
           <div className="signin__form_actions_spacer"></div>
-          <AppButton type="submit" className="app_button" disabled={isSubmitting}>
+          <AppButton
+            type="submit"
+            className="app_button"
+            disabled={isSubmitting}
+          >
             Login
           </AppButton>
         </div>

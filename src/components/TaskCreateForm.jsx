@@ -8,6 +8,8 @@ import Button from "./common/Buttons/Button";
 import Input from "./common/Input";
 import Textarea from "./common/Textarea";
 import AppButton from "./common/Buttons/AppButton";
+import Limit from "./common/Limit";
+import moment from "moment";
 export const TaskCreateForm = () => {
   const dispatch = useDispatch();
 
@@ -20,7 +22,7 @@ export const TaskCreateForm = () => {
   const [title, setTitle] = useState("");
   const [detail, setDetail] = useState("");
   const [done, setDone] = useState(false);
-  const [deadline, setDeadline] = useState();
+  const [limit, setLimit] = useState(moment());
 
   // useCallbackは第二引数に関連があるときに、再定義される関数。パフォーマンス向上？
   const handleToggle = useCallback(() => {
@@ -32,19 +34,21 @@ export const TaskCreateForm = () => {
   }, []);
 
   const handleBlur = useCallback(() => {
+    // タイトルと詳細が選択されているときはなにもしない
     if (title || detail) {
       return;
     }
 
     setTimeout(() => {
-      // フォーム内の要素がフォーカスされている場合は何もしない
       const formElement = refForm.current;
       if (formElement && formElement.contains(document.activeElement)) {
+        // フォーム内の要素がフォーカスされている場合は何もしない
         return;
       }
 
       setFormState("initial");
       setDone(false);
+      setLimit(moment()); // 外れた時に初期化
     }, 100);
   }, [title, detail]);
 
@@ -53,6 +57,7 @@ export const TaskCreateForm = () => {
     setDetail("");
     setFormState("initial");
     setDone(false);
+    setLimit(moment()); // Discard時に期限を初期化
   }, []);
 
   const onSubmit = useCallback(
@@ -97,7 +102,7 @@ export const TaskCreateForm = () => {
       ref={refForm}
       className="task_create_form"
       onSubmit={onSubmit}
-      data-state={formState}
+      data-state={formState} // カスタムの属性？
     >
       <div className="task_create_form__title_container">
         <Button
@@ -144,18 +149,17 @@ export const TaskCreateForm = () => {
             onBlur={handleBlur}
             disabled={formState === "submitting"}
           />
-          <Textarea
-            value={deadline}
-            placeholder={"締め切りを選択"}
-            onChange={(e) => setDeadline(e.target.value)}
-            disabled={formState === "submitting"}
-          />
+          <div>タスクの締切日を設定</div>
+          <Limit limit={limit} setLimit={setLimit} />
+          <p>{limit.format("YYYY-MM-DDTHH:mm:ss[Z]")}</p>
           <div className="task_create_form__actions">
-            <AppButton type="button"
+            <AppButton
+              type="button"
               data-variant="secondary"
               onBlur={handleBlur}
               onClick={handleDiscard}
-              disabled={(!title && !detail) || formState === "submitting"}>
+              disabled={(!title && !detail) || formState === "submitting"}
+            >
               Discard
             </AppButton>
             <div className="task_create_form__spacer"></div>

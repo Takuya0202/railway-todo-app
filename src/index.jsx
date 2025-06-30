@@ -29,6 +29,7 @@ axios.interceptors.request.use((config) => {
 // 書き換え
 createRoot(document.getElementById("root")).render(
   <StrictMode>
+    {/* reduxのstoreを使えるようにする。 */}
     <Provider store={store}>
       <App />
     </Provider>
