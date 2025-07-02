@@ -23,6 +23,7 @@ export const TaskCreateForm = () => {
   const [detail, setDetail] = useState("");
   const [done, setDone] = useState(false);
   const [limit, setLimit] = useState(moment());
+  const [isLimitChange,setIsLimitChange] = useState(false);
 
   // useCallbackは第二引数に関連があるときに、再定義される関数。パフォーマンス向上？
   const handleToggle = useCallback(() => {
@@ -58,6 +59,7 @@ export const TaskCreateForm = () => {
     setFormState("initial");
     setDone(false);
     setLimit(moment()); // Discard時に期限を初期化
+    setIsLimitChange(false);
   }, []);
 
   const onSubmit = useCallback(
@@ -150,7 +152,11 @@ export const TaskCreateForm = () => {
             disabled={formState === "submitting"}
           />
           <div>タスクの締切日を設定</div>
-          <Limit limit={limit} setLimit={setLimit} />
+          <Limit
+            limit={limit}
+            setLimit={setLimit}
+            setIsLimitChange={setIsLimitChange}
+          />
           <p>{limit.format("YYYY-MM-DDTHH:mm:ss[Z]")}</p>
           <div className="task_create_form__actions">
             <AppButton
@@ -158,7 +164,7 @@ export const TaskCreateForm = () => {
               data-variant="secondary"
               onBlur={handleBlur}
               onClick={handleDiscard}
-              disabled={(!title && !detail) || formState === "submitting"}
+              disabled={(!title && !detail && !isLimitChange) || formState === "submitting"}
             >
               Discard
             </AppButton>
