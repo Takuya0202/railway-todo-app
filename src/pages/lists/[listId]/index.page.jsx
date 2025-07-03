@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { TaskItem } from "~/components/TaskItem";
@@ -27,6 +27,9 @@ const ListIndex = () => {
   const incompleteTasksCount = useSelector((state) => {
     return state.task.tasks?.filter((task) => !task.done).length;
   });
+
+  // リスト編集画面のモーダル判断
+  const [editListOpen,setEditListOpen] = useState(false);
 
   useEffect(() => {
     dispatch(setCurrentList(listId));
