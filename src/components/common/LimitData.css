@@ -1,0 +1,8 @@
+.limit-data-card{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+.limit-data{
+  margin: 0 12px;
+}

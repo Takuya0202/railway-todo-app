@@ -127,6 +127,9 @@ const EditTask = () => {
             />
           </div>
         </fieldset>
+        <fieldset>
+          <label htmlFor="">期限</label>
+        </fieldset>
         <div className="edit_list__form_actions">
           <Link to="/" data-variant="secondary" className="app_button">
             Cancel

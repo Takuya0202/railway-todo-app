@@ -7,12 +7,17 @@ import { updateTask } from "~/store/task";
 import "./TaskItem.css";
 import React from "react";
 import Button from "./common/Buttons/Button";
+import moment from "moment";
+import LimitData from "./common/LimitData";
 
 export const TaskItem = ({ task }) => {
   const dispatch = useDispatch();
 
   const { listId } = useParams();
-  const { id, title, detail, done } = task;
+  const { id, title, detail, done , limit} = task;
+  // utcにしてしないと自動的に時間が+9時間されてしまう。
+  const limitData = moment.utc(limit);
+  console.log(limitData);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -55,6 +60,9 @@ export const TaskItem = ({ task }) => {
         </Link>
       </div>
       <div className="task_item__detail">{detail}</div>
+
+      {/* 期限の表示。*/}
+      <LimitData limit={limitData}/>
     </div>
   );
 };

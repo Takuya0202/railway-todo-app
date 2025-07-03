@@ -22,7 +22,7 @@ export const TaskCreateForm = () => {
   const [title, setTitle] = useState("");
   const [detail, setDetail] = useState("");
   const [done, setDone] = useState(false);
-  const [limit, setLimit] = useState(moment());
+  const [limitData, setLimitData] = useState(moment());
   const [isLimitChange,setIsLimitChange] = useState(false);
 
   // useCallbackは第二引数に関連があるときに、再定義される関数。パフォーマンス向上？
@@ -49,7 +49,7 @@ export const TaskCreateForm = () => {
 
       setFormState("initial");
       setDone(false);
-      setLimit(moment()); // 外れた時に初期化
+      setLimitData(moment()); // 外れた時に初期化
     }, 100);
   }, [title, detail]);
 
@@ -58,7 +58,7 @@ export const TaskCreateForm = () => {
     setDetail("");
     setFormState("initial");
     setDone(false);
-    setLimit(moment()); // Discard時に期限を初期化
+    setLimitData(moment()); // Discard時に期限を初期化
     setIsLimitChange(false);
   }, []);
 
@@ -68,7 +68,11 @@ export const TaskCreateForm = () => {
 
       setFormState("submitting");
 
-      void dispatch(createTask({ title, detail, done }))
+      // YYYY-MM-DDTHH:MM:SSZの型に変更
+      const limit = limitData.format("YYYY-MM-DDTHH:mm:ss[Z]");
+      console.log(`期限：${limit}`);
+
+      void dispatch(createTask({ title, detail, done , limit}))
         .unwrap()
         .then(() => {
           handleDiscard();
@@ -153,11 +157,11 @@ export const TaskCreateForm = () => {
           />
           <div>タスクの締切日を設定</div>
           <Limit
-            limit={limit}
-            setLimit={setLimit}
+            limit={limitData}
+            setLimit={setLimitData}
             setIsLimitChange={setIsLimitChange}
           />
-          <p>{limit.format("YYYY-MM-DDTHH:mm:ss[Z]")}</p>
+          <p>{limitData.format("YYYY-MM-DDTHH:mm:ss[Z]")}</p>
           <div className="task_create_form__actions">
             <AppButton
               type="button"
