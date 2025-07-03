@@ -5,16 +5,17 @@ const LimitData = ({limit}) => {
   // 期限日との残り時間を計算
   const now = moment();
   const deadline = limit.diff(now,'days');
+  const checkDeadlineDate = limit.diff(now,'hours');
 
   // 残り時間によって出力内容を変える。NaNの場合は空文字なので問題ない。
   let deadlineText = '';
-  if (deadline < 0) {
+  if (checkDeadlineDate < 0) {
     deadlineText = '期限切れ';
   }
-  else if (deadline ===  0){
+  else if (checkDeadlineDate <=  24 ){
     deadlineText = '本日中';
   }
-  else{
+  else if (checkDeadlineDate > 24){
     deadlineText = `残り ${deadline}日`;
   }
 

@@ -17,7 +17,6 @@ export const TaskItem = ({ task }) => {
   const { id, title, detail, done , limit} = task;
   // utcにしてしないと自動的に時間が+9時間されてしまう。
   const limitData = moment.utc(limit);
-  console.log(limitData);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
 

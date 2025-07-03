@@ -18,7 +18,9 @@ const Limit = ({ limit, setLimit, setIsLimitChange , ...props }) => {
         }}
         onChange={(e) => {
           setLimit(e); // limitはeだけでよい
-          setIsLimitChange(true);
+          if (setIsLimitChange) {
+            setIsLimitChange(true);
+          }
         }}
         dateFormat="YYYY-MM-DD"
         timeFormat="HH:mm:ss"

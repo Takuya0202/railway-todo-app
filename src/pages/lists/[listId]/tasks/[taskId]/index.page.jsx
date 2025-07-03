@@ -11,6 +11,8 @@ import Button from "~/components/common/Buttons/Button";
 import Input from "~/components/common/Input";
 import Textarea from "~/components/common/Textarea";
 import AppButton from "~/components/common/Buttons/AppButton";
+import moment from "moment";
+import Limit from "~/components/common/Limit";
 
 const EditTask = () => {
   const id = useId();
@@ -22,6 +24,7 @@ const EditTask = () => {
   const [title, setTitle] = useState("");
   const [detail, setDetail] = useState("");
   const [done, setDone] = useState(false);
+  const [limitData,setLimitData] = useState();
 
   const [errorMessage, setErrorMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -35,6 +38,7 @@ const EditTask = () => {
       setTitle(task.title);
       setDetail(task.detail);
       setDone(task.done);
+      setLimitData(moment.utc(task.limit)); 
     }
   }, [task]);
 
@@ -48,8 +52,9 @@ const EditTask = () => {
       event.preventDefault();
 
       setIsSubmitting(true);
-
-      void dispatch(updateTask({ id: taskId, title, detail, done }))
+      // limitフォーマットを変換
+      const limit = limitData.format("YYYY-MM-DDTHH:mm:ss[Z]");
+      void dispatch(updateTask({ id: taskId, title, detail, done , limit}))
         .unwrap()
         .then(() => {
           nav(`/lists/${listId}`);
@@ -61,7 +66,7 @@ const EditTask = () => {
           setIsSubmitting(false);
         });
     },
-    [title, taskId, listId, detail, done],
+    [title, taskId, listId, detail, done , limitData],
   );
 
   const handleDelete = useCallback(() => {
@@ -128,7 +133,12 @@ const EditTask = () => {
           </div>
         </fieldset>
         <fieldset>
-          <label htmlFor="">期限</label>
+          <label htmlFor={`${id}-limit`}>期限</label>
+          <Limit 
+            limit={limitData}
+            setLimit={setLimitData}
+            id={`${id}-limit`}
+            />
         </fieldset>
         <div className="edit_list__form_actions">
           <Link to="/" data-variant="secondary" className="app_button">
