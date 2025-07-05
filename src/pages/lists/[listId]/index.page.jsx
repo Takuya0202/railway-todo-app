@@ -46,31 +46,38 @@ const ListIndex = () => {
   }
 
   return (
-    <div className="tasks_list">
-      <div className="tasks_list__title">
-        {listName}
-        {incompleteTasksCount > 0 && (
-          <span className="tasks_list__title__count">
-            {incompleteTasksCount}
-          </span>
-        )}
-        <div className="tasks_list__title_spacer"></div>
-        {/* <Link to={`/lists/${listId}/edit`}>
-          <AppButton>Edit...</AppButton>
-        </Link> */}
-        <AppButton onClick={handleOpen}>Edit...</AppButton>
-        <EditList isOpen={editListOpen} setIsOpen={setEditListOpen} listId={listId}/>
-      </div>
-      <div className="tasks_list__items">
-        <TaskCreateForm />
-        {tasks?.map((task) => {
-          return <TaskItem key={task.id} task={task} />;
-        })}
-        {tasks?.length === 0 && (
-          <div className="tasks_list__items__empty">No tasks yet!</div>
-        )}
-      </div>
-    </div>
+    <>
+      {editListOpen ? (
+        <>
+          <EditList isOpen={editListOpen} setIsOpen={setEditListOpen} listId={listId}/>
+        </>
+      ) : (
+            <div className="tasks_list">
+              <div className="tasks_list__title">
+                {listName}
+                {incompleteTasksCount > 0 && (
+                  <span className="tasks_list__title__count">
+                    {incompleteTasksCount}
+                  </span>
+                )}
+                <div className="tasks_list__title_spacer"></div>
+                {/* <Link to={`/lists/${listId}/edit`}>
+                  <AppButton>Edit...</AppButton>
+                </Link> */}
+                <AppButton onClick={handleOpen}>Edit...</AppButton>
+              </div>
+              <div className="tasks_list__items">
+                <TaskCreateForm />
+                {tasks?.map((task) => {
+                  return <TaskItem key={task.id} task={task} />;
+                })}
+                {tasks?.length === 0 && (
+                  <div className="tasks_list__items__empty">No tasks yet!</div>
+                )}
+              </div>
+            </div>
+      )}
+    </>
   );
 };
 
