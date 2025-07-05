@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { TaskItem } from "~/components/TaskItem";
@@ -9,6 +9,7 @@ import "./index.css";
 import Button from "~/components/common/Buttons/Button";
 import React from "react";
 import AppButton from "~/components/common/Buttons/AppButton";
+import EditList from "~/components/modals/EditList";
 
 const ListIndex = () => {
   const dispatch = useDispatch();
@@ -31,6 +32,10 @@ const ListIndex = () => {
   // リスト編集画面のモーダル判断
   const [editListOpen,setEditListOpen] = useState(false);
 
+  const handleOpen = useCallback(() => {
+    setEditListOpen(true);
+  } , []);
+
   useEffect(() => {
     dispatch(setCurrentList(listId));
     dispatch(fetchTasks()).unwrap();
@@ -50,9 +55,11 @@ const ListIndex = () => {
           </span>
         )}
         <div className="tasks_list__title_spacer"></div>
-        <Link to={`/lists/${listId}/edit`}>
+        {/* <Link to={`/lists/${listId}/edit`}>
           <AppButton>Edit...</AppButton>
-        </Link>
+        </Link> */}
+        <AppButton onClick={handleOpen}>Edit...</AppButton>
+        <EditList isOpen={editListOpen} setIsOpen={setEditListOpen} listId={listId}/>
       </div>
       <div className="tasks_list__items">
         <TaskCreateForm />
