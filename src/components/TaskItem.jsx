@@ -14,7 +14,7 @@ export const TaskItem = ({ task }) => {
   const dispatch = useDispatch();
 
   const { listId } = useParams();
-  const { id, title, detail, done , limit} = task;
+  const { id, title, detail, done, limit } = task;
   // utcにしてしないと自動的に時間が+9時間されてしまう。
   const limitData = moment.utc(limit);
 
@@ -61,7 +61,7 @@ export const TaskItem = ({ task }) => {
       <div className="task_item__detail">{detail}</div>
 
       {/* 期限の表示。*/}
-      <LimitData limit={limitData}/>
+      <LimitData limit={limitData} />
     </div>
   );
 };

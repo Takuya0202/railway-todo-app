@@ -30,11 +30,11 @@ const ListIndex = () => {
   });
 
   // リスト編集画面のモーダル判断
-  const [editListOpen,setEditListOpen] = useState(false);
+  const [editListOpen, setEditListOpen] = useState(false);
 
   const handleOpen = useCallback(() => {
     setEditListOpen(true);
-  } , []);
+  }, []);
 
   useEffect(() => {
     dispatch(setCurrentList(listId));
@@ -49,33 +49,37 @@ const ListIndex = () => {
     <>
       {editListOpen ? (
         <>
-          <EditList isOpen={editListOpen} setIsOpen={setEditListOpen} listId={listId}/>
+          <EditList
+            isOpen={editListOpen}
+            setIsOpen={setEditListOpen}
+            listId={listId}
+          />
         </>
       ) : (
-            <div className="tasks_list">
-              <div className="tasks_list__title">
-                {listName}
-                {incompleteTasksCount > 0 && (
-                  <span className="tasks_list__title__count">
-                    {incompleteTasksCount}
-                  </span>
-                )}
-                <div className="tasks_list__title_spacer"></div>
-                {/* <Link to={`/lists/${listId}/edit`}>
-                  <AppButton>Edit...</AppButton>
-                </Link> */}
-                <AppButton onClick={handleOpen}>Edit...</AppButton>
-              </div>
-              <div className="tasks_list__items">
-                <TaskCreateForm />
-                {tasks?.map((task) => {
-                  return <TaskItem key={task.id} task={task} />;
-                })}
-                {tasks?.length === 0 && (
-                  <div className="tasks_list__items__empty">No tasks yet!</div>
-                )}
-              </div>
-            </div>
+        <div className="tasks_list">
+          <div className="tasks_list__title">
+            {listName}
+            {incompleteTasksCount > 0 && (
+              <span className="tasks_list__title__count">
+                {incompleteTasksCount}
+              </span>
+            )}
+            <div className="tasks_list__title_spacer"></div>
+            {/* <Link to={`/lists/${listId}/edit`}>
+            <AppButton>Edit...</AppButton>
+          </Link> */}
+            <AppButton onClick={handleOpen}>Edit...</AppButton>
+          </div>
+          <div className="tasks_list__items">
+            <TaskCreateForm />
+            {tasks?.map((task) => {
+              return <TaskItem key={task.id} task={task} />;
+            })}
+            {tasks?.length === 0 && (
+              <div className="tasks_list__items__empty">No tasks yet!</div>
+            )}
+          </div>
+        </div>
       )}
     </>
   );

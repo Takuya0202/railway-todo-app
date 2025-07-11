@@ -23,7 +23,7 @@ export const TaskCreateForm = () => {
   const [detail, setDetail] = useState("");
   const [done, setDone] = useState(false);
   const [limitData, setLimitData] = useState(moment());
-  const [isLimitChange,setIsLimitChange] = useState(false);
+  const [isLimitChange, setIsLimitChange] = useState(false);
 
   // useCallbackは第二引数に関連があるときに、再定義される関数。パフォーマンス向上？
   const handleToggle = useCallback(() => {
@@ -72,7 +72,7 @@ export const TaskCreateForm = () => {
       const limit = limitData.format("YYYY-MM-DDTHH:mm:ss[Z]");
       console.log(`期限：${limit}`);
 
-      void dispatch(createTask({ title, detail, done , limit}))
+      void dispatch(createTask({ title, detail, done, limit }))
         .unwrap()
         .then(() => {
           handleDiscard();
@@ -168,7 +168,10 @@ export const TaskCreateForm = () => {
               data-variant="secondary"
               onBlur={handleBlur}
               onClick={handleDiscard}
-              disabled={(!title && !detail && !isLimitChange) || formState === "submitting"}
+              disabled={
+                (!title && !detail && !isLimitChange) ||
+                formState === "submitting"
+              }
             >
               Discard
             </AppButton>

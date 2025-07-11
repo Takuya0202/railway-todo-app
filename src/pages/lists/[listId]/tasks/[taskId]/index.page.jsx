@@ -24,7 +24,7 @@ const EditTask = () => {
   const [title, setTitle] = useState("");
   const [detail, setDetail] = useState("");
   const [done, setDone] = useState(false);
-  const [limitData,setLimitData] = useState();
+  const [limitData, setLimitData] = useState();
 
   const [errorMessage, setErrorMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -38,7 +38,7 @@ const EditTask = () => {
       setTitle(task.title);
       setDetail(task.detail);
       setDone(task.done);
-      setLimitData(moment.utc(task.limit)); 
+      setLimitData(moment.utc(task.limit));
     }
   }, [task]);
 
@@ -54,7 +54,7 @@ const EditTask = () => {
       setIsSubmitting(true);
       // limitフォーマットを変換
       const limit = limitData.format("YYYY-MM-DDTHH:mm:ss[Z]");
-      void dispatch(updateTask({ id: taskId, title, detail, done , limit}))
+      void dispatch(updateTask({ id: taskId, title, detail, done, limit }))
         .unwrap()
         .then(() => {
           nav(`/lists/${listId}`);
@@ -66,7 +66,7 @@ const EditTask = () => {
           setIsSubmitting(false);
         });
     },
-    [title, taskId, listId, detail, done , limitData],
+    [title, taskId, listId, detail, done, limitData],
   );
 
   const handleDelete = useCallback(() => {
@@ -134,11 +134,7 @@ const EditTask = () => {
         </fieldset>
         <fieldset>
           <label htmlFor={`${id}-limit`}>期限</label>
-          <Limit 
-            limit={limitData}
-            setLimit={setLimitData}
-            id={`${id}-limit`}
-            />
+          <Limit limit={limitData} setLimit={setLimitData} id={`${id}-limit`} />
         </fieldset>
         <div className="edit_list__form_actions">
           <Link to="/" data-variant="secondary" className="app_button">

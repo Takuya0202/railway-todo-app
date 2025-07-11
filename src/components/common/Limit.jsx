@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import Datetime from "react-datetime";
 import "react-datetime/css/react-datetime.css"; // css インポート
-import './Limit.css';
+import "./Limit.css";
 
-const Limit = ({ limit, setLimit, setIsLimitChange , ...props }) => {
+const Limit = ({ limit, setLimit, setIsLimitChange, ...props }) => {
   return (
     <div className="limit-card">
       <Datetime
