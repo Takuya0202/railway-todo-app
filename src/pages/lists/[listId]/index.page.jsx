@@ -50,7 +50,11 @@ const ListIndex = () => {
     <>
       {editListOpen ? (
         <>
-          <EditListModal isOpen={editListOpen} setIsOpen={setEditListOpen} listId={listId}/>
+          <EditListModal
+            isOpen={editListOpen}
+            setIsOpen={setEditListOpen}
+            listId={listId}
+          />
         </>
       ) : (
         <div className="tasks_list">
@@ -62,9 +66,6 @@ const ListIndex = () => {
               </span>
             )}
             <div className="tasks_list__title_spacer"></div>
-            {/* <Link to={`/lists/${listId}/edit`}>
-            <AppButton>Edit...</AppButton>
-          </Link> */}
             <AppButton onClick={handleOpen}>Edit...</AppButton>
           </div>
           <div className="tasks_list__items">

@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import { store } from "./store/index";
 import axios from "~/vendor/axios";
 import { createRoot } from "react-dom/client";
+import Modal from "react-modal";
 
 axios.interceptors.request.use((config) => {
   const token = store.getState().auth.token;
@@ -27,6 +28,9 @@ axios.interceptors.request.use((config) => {
 // )
 
 // 書き換え
+
+Modal.setAppElement("#root");
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     {/* reduxのstoreを使えるようにする。 */}
