@@ -9,3 +9,10 @@
   background-color: #e6e6e6;
   padding: 1rem;
 }
+.modal-text {
+  color: var(--slate-700);
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+}
