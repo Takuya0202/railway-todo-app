@@ -1,0 +1,11 @@
+.edit-list-modal{
+  width: 100%;
+  height: 100%;
+  background-color: #222121;
+}
+.modal-form {
+  width: 600px;
+  height: 400px;
+  background-color: #e6e6e6;
+  padding: 1rem;
+}

@@ -10,6 +10,7 @@ import Button from "~/components/common/Buttons/Button";
 import React from "react";
 import AppButton from "~/components/common/Buttons/AppButton";
 import EditList from "~/components/modals/EditList";
+import EditListModal from "~/components/modals/EditListModal";
 
 const ListIndex = () => {
   const dispatch = useDispatch();
@@ -49,11 +50,7 @@ const ListIndex = () => {
     <>
       {editListOpen ? (
         <>
-          <EditList
-            isOpen={editListOpen}
-            setIsOpen={setEditListOpen}
-            listId={listId}
-          />
+          <EditListModal isOpen={editListOpen} setIsOpen={setEditListOpen} listId={listId}/>
         </>
       ) : (
         <div className="tasks_list">

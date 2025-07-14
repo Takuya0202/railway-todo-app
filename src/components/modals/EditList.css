@@ -51,10 +51,10 @@
 }
 
 .modal {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: azure;
+  width: 80%;
+  height: 80%;
+  max-width: var(--width-edit-form);
+  max-height: var(--height-edit-form);
+  margin: 0 auto;
+  padding: 2rem;
 }
