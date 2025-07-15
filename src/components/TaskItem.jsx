@@ -9,6 +9,7 @@ import React from "react";
 import Button from "./common/Buttons/Button";
 import moment from "moment";
 import LimitData from "./common/LimitData";
+import EditTaskModal from "./modals/EditTaskModal";
 
 export const TaskItem = ({ task }) => {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ export const TaskItem = ({ task }) => {
   const limitData = moment.utc(limit);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleToggle = useCallback(() => {
     setIsSubmitting(true);
@@ -26,6 +28,10 @@ export const TaskItem = ({ task }) => {
       setIsSubmitting(false);
     });
   }, [id, done]);
+
+  const handleOpen = useCallback(() => {
+    setIsOpen(true);
+  }, []);
 
   return (
     <div className="task_item">
@@ -51,12 +57,16 @@ export const TaskItem = ({ task }) => {
           {title}
         </div>
         <div aria-hidden className="task_item__title_spacer"></div>
-        <Link
+        {/* <Link
           to={`/lists/${listId}/tasks/${id}`}
           className="task_item__title_action"
         >
           <PencilIcon aria-label="Edit" />
-        </Link>
+        </Link> */}
+        <button onClick={handleOpen}>
+          <PencilIcon aria-label="Edit" />
+        </button>
+        <EditTaskModal isOpen={isOpen} setIsOpen={setIsOpen} listId={listId} taskId={id}/>
       </div>
       <div className="task_item__detail">{detail}</div>
 

@@ -1,42 +1,54 @@
-import React, { useCallback, useId } from "react";
-import { useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { fetchLists, updateList, deleteList } from "~/store/list/index";
+import React, { useCallback, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { updateTask, deleteTask, fetchTasks } from "~/store/task/index";
+import { setCurrentList } from "~/store/list/index";
 import Modal from "react-modal";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import moment from "moment";
+import { Box, Button, Checkbox, FormControlLabel, TextField, Typography } from "@mui/material";
+import CloseIcom from "@mui/icons-material/Close";
 import DeleteIcon from "@mui/icons-material/Delete";
-import CloseIcon from "@mui/icons-material/Close";
+import Limit from "../common/Limit";
 
-const EditListModal = ({ isOpen, setIsOpen, listId }) => {
-  const id = useId();
+const EditTaskModal = ({ isOpen, setIsOpen, taskId, listId }) => {
   const dispatch = useDispatch();
+
   const [title, setTitle] = useState("");
+  const [detail, setDetail] = useState("");
+  const [done, setDone] = useState(false);
+  const [limitData, setLimitData] = useState();
+
   const [errorMessage, setErrorMessage] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const list = useSelector((state) => {
-    return state.list.lists?.find((list) => list.id === listId);
+  const task = useSelector((state) => {
+    return state.task.tasks?.find((task) => task.id === taskId);
   });
 
   useEffect(() => {
-    if (list) {
-      setTitle(list.title);
+    if (task) {
+      setTitle(task.title);
+      setDetail(task.detail);
+      setDone(task.done);
+      setLimitData(moment.utc(task.limit));
     }
-  }, [list]);
+  }, [task]);
 
   useEffect(() => {
-    void dispatch(fetchLists());
+    void dispatch(setCurrentList(listId));
+    void dispatch(fetchTasks());
   }, [listId]);
 
   const onSubmit = useCallback(
     (e) => {
       e.preventDefault();
       setIsSubmitting(true);
-      setIsOpen(false);
 
-      void dispatch(updateList({ id: listId, title }))
+      const limit = limitData.format("YYYY-MM-DDTHH:mm:ss[Z]");
+      void dispatch(updateTask({ id: taskId, title, detail, done, limit }))
         .unwrap()
+        .then(() => {
+          setIsOpen(false);
+        })
         .catch((err) => {
           setErrorMessage(err.message);
         })
@@ -44,37 +56,39 @@ const EditListModal = ({ isOpen, setIsOpen, listId }) => {
           setIsSubmitting(false);
         });
     },
-    [title, listId],
+    [title, taskId, listId, detail, done, limitData],
   );
 
   const handleDelete = useCallback(() => {
-    if (!window.confirm("Are you sure you want to delete this list?")) {
+    if (!window.confirm("Are you sure you want to delete this task?")) {
       return;
     }
 
     setIsSubmitting(true);
-    setIsOpen(false);
 
-    void dispatch(deleteList({ id: listId }))
+    void dispatch(deleteTask({ id: taskId }))
       .unwrap()
+      .then(() => {
+        setIsOpen(false);
+      })
       .catch((err) => {
         setErrorMessage(err.message);
       })
       .finally(() => {
         setIsSubmitting(false);
       });
-  }, []);
+  }, [taskId]);
 
   const handleClose = useCallback(() => {
     setIsOpen(false);
-  }, []);
+  });
 
   return (
     <Modal
       isOpen={isOpen}
-      onRequestClose={handleClose} // これによって画面外をクリックしたときにモーダルが閉じる
-      contentLabel="Edit List Modal"
-      key={listId}
+      onRequestClose={handleClose}
+      contentLabel="Edit Task Modal"
+      key={taskId}
       style={{
         content: {
           top: "50%",
@@ -103,29 +117,45 @@ const EditListModal = ({ isOpen, setIsOpen, listId }) => {
           marginBottom: "1rem",
         }}
       >
-        <Typography
-          variant="h4"
-          component={"h2"}
-          align="left"
-          color="#3e3e3e"
-          fontWeight={"500"}
-        >
-          Edit List name
+        <Typography component={"h4"} variant="h4">
+          Edit Task
         </Typography>
-        <Button variant="text" onClick={handleClose} type="button">
-          <CloseIcon />
+        <Button type="button" variant="text" onClick={handleClose}>
+          <CloseIcom />
         </Button>
       </Box>
-      <Typography variant="p" component={"p"} align="left" color="error">
+      <Typography component={"p"} color="error">
         {errorMessage}
       </Typography>
-      <Box component="form" onSubmit={onSubmit}>
+      <Box component={"form"} onSubmit={onSubmit}>
         <TextField
-          label="name"
+          label="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
+          style={{display: "block", marginBottom: "1rem"}}
+          fullWidth
+          required
+        />
+        <TextField
+          label="Description"
+          value={detail}
+          onChange={(e) => setDetail(e.target.value)}
+          style={{display: "block", marginBottom: "1rem"}}
           fullWidth
         />
+        <FormControlLabel
+          control={
+            <Checkbox
+              value={done}
+              onChange={(e) => setDone(e.target.checked)}
+            />
+          }
+          label="Is Done"
+        />
+        <Box component="div" style={{ marginTop: "1rem" , height: '200px'}}>
+          <label>期限</label>
+          <Limit limit={limitData} setLimit={setLimitData} />
+        </Box>
         <Box
           component={"div"}
           style={{
@@ -167,4 +197,4 @@ const EditListModal = ({ isOpen, setIsOpen, listId }) => {
   );
 };
 
-export default EditListModal;
+export default EditTaskModal;
