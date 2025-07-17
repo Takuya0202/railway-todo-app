@@ -8,7 +8,6 @@ import { useEffect } from "react";
 import { fetchLists } from "~/store/list/index";
 import React from "react";
 import Button from "./common/Buttons/Button";
-import Limit from "./common/Limit";
 
 export const Sidebar = () => {
   const dispatch = useDispatch();

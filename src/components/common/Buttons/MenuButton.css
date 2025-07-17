@@ -23,8 +23,8 @@
   margin-top: 2.5rem;
 }
 
-.sidebar__spacer {
-  flex-grow: 1;
+.sidebar__spacer__sp {
+  flex-grow: 0.8;
 }
 
 .sidebar__lists_title {

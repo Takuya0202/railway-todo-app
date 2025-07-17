@@ -3,8 +3,10 @@ import moment from "moment";
 import "./LimitData.css";
 const LimitData = ({ limit }) => {
   // 期限日との残り時間を計算
-  const now = moment();
+  const now = moment.utc();
   const deadline = limit.diff(now, "minutes");
+  console.log(now);
+  console.log(limit);
   let deadlineText = "";
   if (deadline < 0) {
     deadlineText = "期限切れ";

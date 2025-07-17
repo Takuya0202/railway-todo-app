@@ -93,7 +93,7 @@ const MenuButton = () => {
                   </ul>
                 </div>
               )}
-              <div className="sidebar__spacer" aria-hidden />
+              <div className="sidebar__spacer__sp" aria-hidden />
               <div className="sidebar__account">
                 <p className="sidebar__account_name">{userName}</p>
                 <Button
