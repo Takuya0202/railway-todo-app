@@ -69,6 +69,8 @@ const EditListModal = ({ isOpen, setIsOpen, listId }) => {
     setIsOpen(false);
   }, []);
 
+  const isMobile = useSelector((state) => state.responsive.isMobile);
+
   return (
     <Modal
       isOpen={isOpen}
@@ -82,7 +84,7 @@ const EditListModal = ({ isOpen, setIsOpen, listId }) => {
           right: "auto",
           bottom: "auto",
           transform: "translate(-50%, -50%)",
-          width: "500px",
+          width: isMobile ? "90%" : "500px",
           height: "auto",
           margin: "auto",
           padding: "2rem",
@@ -129,22 +131,25 @@ const EditListModal = ({ isOpen, setIsOpen, listId }) => {
         <Box
           component={"div"}
           style={{
-            display: "flex",
+            display: isMobile || "flex",
             justifyContent: "space-between",
             alignItems: "center",
             widowth: "80%",
             margin: "1rem auto ",
           }}
         >
-          <Button variant="outlined" onClick={handleClose} type="button">
-            Cancel
-          </Button>
+          {isMobile || (
+            <Button variant="outlined" onClick={handleClose} type="button">
+              Cancel
+            </Button>
+          )}
           <Box
             component={"div"}
             style={{
               display: "flex",
               alignItems: "center",
               gap: "1rem",
+              justifyContent: isMobile && "flex-end",
             }}
           >
             <Button

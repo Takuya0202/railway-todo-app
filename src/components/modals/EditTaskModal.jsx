@@ -4,7 +4,14 @@ import { updateTask, deleteTask, fetchTasks } from "~/store/task/index";
 import { setCurrentList } from "~/store/list/index";
 import Modal from "react-modal";
 import moment from "moment";
-import { Box, Button, Checkbox, FormControlLabel, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Checkbox,
+  FormControlLabel,
+  TextField,
+  Typography,
+} from "@mui/material";
 import CloseIcom from "@mui/icons-material/Close";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Limit from "../common/Limit";
@@ -83,6 +90,8 @@ const EditTaskModal = ({ isOpen, setIsOpen, taskId, listId }) => {
     setIsOpen(false);
   });
 
+  const isMobile = useSelector((state) => state.responsive.isMobile);
+
   return (
     <Modal
       isOpen={isOpen}
@@ -96,7 +105,7 @@ const EditTaskModal = ({ isOpen, setIsOpen, taskId, listId }) => {
           right: "auto",
           bottom: "auto",
           transform: "translate(-50%, -50%)",
-          width: "500px",
+          width: isMobile ? "90%" : "500px",
           height: "auto",
           margin: "auto",
           padding: "2rem",
@@ -132,7 +141,7 @@ const EditTaskModal = ({ isOpen, setIsOpen, taskId, listId }) => {
           label="Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          style={{display: "block", marginBottom: "1rem"}}
+          style={{ display: "block", marginBottom: "1rem" }}
           fullWidth
           required
         />
@@ -140,7 +149,7 @@ const EditTaskModal = ({ isOpen, setIsOpen, taskId, listId }) => {
           label="Description"
           value={detail}
           onChange={(e) => setDetail(e.target.value)}
-          style={{display: "block", marginBottom: "1rem"}}
+          style={{ display: "block", marginBottom: "1rem" }}
           fullWidth
         />
         <FormControlLabel
@@ -152,29 +161,32 @@ const EditTaskModal = ({ isOpen, setIsOpen, taskId, listId }) => {
           }
           label="Is Done"
         />
-        <Box component="div" style={{ marginTop: "1rem" , height: '200px'}}>
+        <Box component="div" style={{ marginTop: "1rem", height: "200px" }}>
           <label>期限</label>
           <Limit limit={limitData} setLimit={setLimitData} />
         </Box>
         <Box
           component={"div"}
           style={{
-            display: "flex",
+            display: isMobile || "flex",
             justifyContent: "space-between",
             alignItems: "center",
             widowth: "80%",
             margin: "1rem auto ",
           }}
         >
-          <Button variant="outlined" onClick={handleClose} type="button">
-            Cancel
-          </Button>
+          {isMobile ? null : (
+            <Button variant="outlined" onClick={handleClose} type="button">
+              Cancel
+            </Button>
+          )}
           <Box
             component={"div"}
             style={{
               display: "flex",
               alignItems: "center",
               gap: "1rem",
+              justifyContent: isMobile && "flex-end",
             }}
           >
             <Button

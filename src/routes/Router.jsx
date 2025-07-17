@@ -10,13 +10,16 @@ import EditTask from "~/pages/lists/[listId]/tasks/[taskId]/index.page";
 import SignUp from "~/pages/signup/index.page";
 import EditList from "~/pages/lists/[listId]/edit/index.page";
 import ListIndex from "~/pages/lists/[listId]/index.page";
+import MenuButton from "~/components/common/Buttons/MenuButton";
 
 export const Router = () => {
   const auth = useSelector((state) => state.auth.token !== null);
 
+  // モバイル
+  const isMobile = useSelector((state) => state.responsive.isMobile);
   return (
     <BrowserRouter>
-      <Sidebar />
+      {isMobile ? <MenuButton /> : <Sidebar />}
       <div className="main_content">
         <Routes>
           <Route path="/signin" element={<SignIn />} />

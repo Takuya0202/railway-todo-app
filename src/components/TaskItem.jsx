@@ -66,7 +66,12 @@ export const TaskItem = ({ task }) => {
         <button onClick={handleOpen}>
           <PencilIcon aria-label="Edit" />
         </button>
-        <EditTaskModal isOpen={isOpen} setIsOpen={setIsOpen} listId={listId} taskId={id}/>
+        <EditTaskModal
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          listId={listId}
+          taskId={id}
+        />
       </div>
       <div className="task_item__detail">{detail}</div>
 
